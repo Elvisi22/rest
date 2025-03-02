@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import repository.UserRepository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -31,5 +32,17 @@ public class UserService {
         User user = userMapper.toEntity(userDTO);
         user = userRepository.save(user);
         return userMapper.toDTO(user);
+    }
+
+    public void deleteUser(Long id){
+        userRepository.deleteById(id);
+    }
+
+    public Optional<User> getUserById(Long id){
+        return userRepository.findById(id);
+    }
+
+    public List<User> getUsersByFlightId(Long flightId){
+        return userRepository.findUsersByFlightId(flightId);
     }
 }
